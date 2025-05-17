@@ -1,0 +1,9 @@
+/CMakeUserPresets.json
+/.vscode
+/build
+default.profraw
+default.profdata
+/coverage_report
+/.cache
+logs
+Testings

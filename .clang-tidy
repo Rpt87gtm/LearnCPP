@@ -1,0 +1,11 @@
+Checks: '*,-modernize-replace-disallow-copy-and-assign-macro,-llvmlibc-*,-modernize-use-trailing-return-type,-llvm-header-guard,-fuchsia-default-arguments-calls,-fuchsia-default-arguments-declarations,-altera-struct-pack-align,-google-build-using-namespace,-cppcoreguidelines-pro-bounds-array-to-pointer-decay,-hicpp-no-array-decay,-fuchsia-statically-constructed-objects,-performance-unnecessary-value-param,-fuchsia-overloaded-operator,-cppcoreguidelines-avoid-magic-numbers,-hicpp-signed-bitwise,-readability-convert-member-functions-to-static,-google-explicit-constructor,-misc-non-private-member-variables-in-classes,-cppcoreguidelines-pro-type-vararg,-misc-no-recursion,-concurrency-mt-unsafe,-cppcoreguidelines-c-copy-assignment-signature,-fuchsia-default-arguments,-google-runtime-references,-fuchsia-trailing-return,-modernize-use-nodiscard,-altera-unroll-loops,-altera-id-dependent-backward-branch,-readability-identifier-length,-bugprone-easily-swappable-parameters,-bugprone-narrowing-conversions,-abseil-string-find-str-contains,-misc-const-correctness,-bugprone-unchecked-optional-access,-bugprone-exception-escape,-cppcoreguidelines-avoid-const-or-ref-data-members,-cppcoreguidelines-avoid-reference-coroutine-parameters,-cppcoreguidelines-avoid-do-while,-clang-diagnostic-unknown-pragmas,-misc-include-cleaner,-performance-avoid-endl'
+WarningsAsErrors: '*'
+CheckOptions:
+  - key:    misc-non-private-member-variables-in-classes.IgnoreClassesWithAllMemberVariablesBeingPublic
+    value: 1
+  - key: readability-magic-numbers.IgnorePowersOf2IntegerValues
+    value: 1
+  - key: bugprone-exception-escape.FunctionsThatShouldNotThrow
+    value: std::terminate
+  - key: readability-function-cognitive-complexity.IgnoreMacros
+    value: 1
