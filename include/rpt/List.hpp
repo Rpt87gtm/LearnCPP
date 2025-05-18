@@ -39,13 +39,14 @@ public:
         m_size++;
     }
 
-    void popBack() {
+    T popBack() {
         if (m_size == 0) {
             throw std::runtime_error("List is empty");
         }
+        T value = tail->m_value;
 
         if (m_size == 1) {
-            delete head;
+            delete tail;
             head = nullptr;
             tail = nullptr;
         } else {
@@ -56,6 +57,7 @@ public:
         }
 
         m_size--;
+        return value;
     }
 
     T at(size_t index) {
