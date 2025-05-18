@@ -17,6 +17,12 @@ template <typename T> class List {
 public:
     List() {}
 
+    List(std::initializer_list<T> init) {
+        for (auto value: init) {
+            pushBack(value);
+        }
+    }
+
     ~List() {
         while (m_size > 0) {
             popBack();

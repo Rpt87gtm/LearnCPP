@@ -2,6 +2,16 @@
 #include <catch2/catch_test_macros.hpp>
 #include <rpt/List.hpp>
 
+TEST_CASE("initializer list counstuctor", "[List]") {
+    rpt::List<int> list{1, 2, 3, 4, 5};
+
+    REQUIRE(list.at(0) == 1);
+    REQUIRE(list.at(1) == 2);
+    REQUIRE(list.at(2) == 3);
+    REQUIRE(list.at(3) == 4);
+    REQUIRE(list.at(4) == 5);
+}
+
 TEST_CASE("push back", "[List]") {
     rpt::List<int> list;
 
