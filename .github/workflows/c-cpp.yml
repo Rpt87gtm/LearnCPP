@@ -1,0 +1,37 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        build_type: [Debug, Release]  # Тестируем оба типа сборки
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install Conan
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y python3-pip
+        pip install conan
+
+    - name: Install dependencies (Conan)
+      run: |
+        conan profile detect
+        conan install . -of build --build=missing -s build_type=${{ matrix.build_type }}
+
+    - name: Configure (CMake)
+      run: cmake --preset conan-${{ matrix.build_type | lower }}
+
+    - name: Build
+      run: cmake --build --preset conan-${{ matrix.build_type | lower }}
+
+    - name: Run tests
+      run: ctest --preset conan-${{ matrix.build_type | lower }} --output-on-failure
