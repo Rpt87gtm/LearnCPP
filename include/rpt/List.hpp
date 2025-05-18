@@ -39,6 +39,22 @@ public:
         m_size++;
     }
 
+    void pushFront(T value) {
+        auto *node = new ListNode<T>(value);
+
+        if (m_size == 0) {
+            head = node;
+            tail = node;
+        } else {
+            head->prev = node;
+            node->next = head;
+
+            head = node;
+        }
+
+        m_size++;
+    }
+
     T popBack() {
         if (m_size == 0) {
             throw std::runtime_error("List is empty");
