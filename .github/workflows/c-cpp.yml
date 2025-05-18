@@ -16,13 +16,23 @@ jobs:
     - name: Install Conan
       run: |
         sudo apt-get update
-        sudo apt-get install -y python3-pip
+        sudo apt-get install -y python3-pip clang
         pip install conan
 
+    - name: Set up compiler
+      run: |
+        echo "CC=clang" >> $GITHUB_ENV
+        echo "CXX=clang++" >> $GITHUB_ENV
+        
     - name: Install dependencies (Conan)
       run: |
         conan profile detect
-        conan install . -of build --build=missing
+        conan install . -of build --build=missing \
+          -s compiler=${{ matrix.compiler }} \
+          -s compiler.version=14 \
+          -s compiler.libcxx=libstdc++20
+
+       
 
     - name: Configure (CMake)
       run: cmake --preset conan-release
