@@ -22,7 +22,7 @@ jobs:
     - name: Install dependencies (Conan)
       run: |
         conan profile detect
-        conan install . -of build --build=missing -s build_type=release
+        conan install . -of build --build=missing
 
     - name: Configure (CMake)
       run: cmake --preset conan-release
