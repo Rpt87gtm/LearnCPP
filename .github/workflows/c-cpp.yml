@@ -30,7 +30,7 @@ jobs:
         conan install . -of build --build=missing \
           -s compiler=clang \
           -s compiler.version=14 \
-          -s compiler.libcxx=libstdc++20
+          -s compiler.libcxx=libstdc++11
 
        
 
