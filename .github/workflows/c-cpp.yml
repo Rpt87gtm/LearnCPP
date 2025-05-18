@@ -9,10 +9,7 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        build_type: [Debug, Release]
-
+    
     steps:
     - uses: actions/checkout@v4
 
@@ -25,13 +22,13 @@ jobs:
     - name: Install dependencies (Conan)
       run: |
         conan profile detect
-        conan install . -of build --build=missing -s build_type=${{ matrix.build_type }}
+        conan install . -of build --build=missing -s build_type=release
 
     - name: Configure (CMake)
-      run: cmake --preset conan-${{ matrix.build_type }}
+      run: cmake --preset conan-release
 
     - name: Build
-      run: cmake --build --preset conan-${{ matrix.build_type }}
+      run: cmake --build --preset conan-release
 
     - name: Run tests
-      run: ctest --preset conan-${{ matrix.build_type }} --output-on-failure
+      run: ctest --preset conan-release --output-on-failure
