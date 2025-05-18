@@ -67,13 +67,30 @@ public:
         if (m_size == 0) {
             throw std::runtime_error("List is empty");
         }
-        T value = tail->m_value;
+        T value = std::move(tail->m_value);
         if (m_size == 1) {
             head.reset();
             tail = nullptr;
         } else {
             tail = tail->prev;
             tail->next.reset();
+        }
+        m_size--;
+        return value;
+    }
+
+    T popFront() {
+        if (m_size == 0) {
+            throw std::runtime_error("List is empty");
+        }
+        T value = std::move(head->m_value);
+        if (m_size == 1) {
+            head.reset();
+            tail = nullptr;
+        } else {
+            std::unique_ptr<ListNode> old_head = std::move(head);
+            head                               = std::move(old_head->next);
+            head->prev                         = nullptr;
         }
         m_size--;
         return value;

@@ -71,3 +71,22 @@ TEST_CASE("pop back", "[List]") {
     REQUIRE(value_at_3 == 4);
     REQUIRE(value_at_4 == 5);
 }
+
+TEST_CASE("pop front", "[List]") {
+    rpt::List<int> list;
+
+    list.pushBack(1);
+    list.pushBack(2);
+    list.pushBack(3);
+    list.pushBack(4);
+    list.pushBack(5);
+
+    int value_at_0 = list.popFront();
+    int value_at_1 = list.popFront();
+
+    REQUIRE(value_at_0 == 1);
+    REQUIRE(value_at_1 == 2);
+    REQUIRE(list.at(0) == 3);
+    REQUIRE(list.at(1) == 4);
+    REQUIRE(list.at(2) == 5);
+}
