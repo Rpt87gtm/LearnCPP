@@ -14,7 +14,7 @@ private:
     };
 
 public:
-    List() {}
+    List() = default;
 
     List(std::initializer_list<T> init) {
         try {
@@ -79,7 +79,20 @@ public:
         return value;
     }
 
-    T at(size_t index) {
+    T &at(size_t index) {
+        if (index >= m_size) {
+            throw std::out_of_range("List index out of range");
+        }
+
+        ListNode *current = head.get();
+        for (size_t i = 0; i < index; ++i) {
+            current = current->next.get();
+        }
+
+        return current->m_value;
+    }
+
+    const T &at(size_t index) const {
         if (index >= m_size) {
             throw std::out_of_range("List index out of range");
         }

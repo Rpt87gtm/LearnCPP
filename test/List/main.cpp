@@ -12,6 +12,15 @@ TEST_CASE("initializer list counstuctor", "[List]") {
     REQUIRE(list.at(4) == 5);
 }
 
+TEST_CASE("at ref", "[List]") {
+    rpt::List<int> list{1, 2, 3};
+    list.at(1) = 7;
+
+    REQUIRE(list.at(0) == 1);
+    REQUIRE(list.at(1) == 7);
+    REQUIRE(list.at(2) == 3);
+}
+
 TEST_CASE("push back", "[List]") {
     rpt::List<int> list;
 
