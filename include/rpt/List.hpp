@@ -18,12 +18,19 @@ public:
     List() {}
 
     List(std::initializer_list<T> init) {
-        for (auto value: init) {
-            pushBack(value);
+        try {
+            for (const auto &value: init) {
+                pushBack(value);
+            }
+        } catch (...) {
+            clear();
+            throw;
         }
     }
 
-    ~List() {
+    ~List() { clear(); }
+
+    void clear() {
         while (m_size > 0) {
             popBack();
         }
