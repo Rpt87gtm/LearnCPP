@@ -96,7 +96,7 @@ public:
         return value;
     }
 
-    T &at(size_t index) {
+    [[nodiscard]] T &at(size_t index) {
         if (index >= m_size) {
             throw std::out_of_range("List index out of range");
         }
@@ -109,7 +109,7 @@ public:
         return current->m_value;
     }
 
-    const T &at(size_t index) const {
+    [[nodiscard]] const T &at(size_t index) const {
         if (index >= m_size) {
             throw std::out_of_range("List index out of range");
         }
