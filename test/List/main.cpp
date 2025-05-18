@@ -5,6 +5,7 @@
 TEST_CASE("initializer list counstuctor", "[List]") {
     rpt::List<int> list{1, 2, 3, 4, 5};
 
+    REQUIRE(list.size() == 5);
     REQUIRE(list.at(0) == 1);
     REQUIRE(list.at(1) == 2);
     REQUIRE(list.at(2) == 3);
@@ -16,6 +17,7 @@ TEST_CASE("at ref", "[List]") {
     rpt::List<int> list{1, 2, 3};
     list.at(1) = 7;
 
+    REQUIRE(list.size() == 3);
     REQUIRE(list.at(0) == 1);
     REQUIRE(list.at(1) == 7);
     REQUIRE(list.at(2) == 3);
@@ -30,6 +32,7 @@ TEST_CASE("push back", "[List]") {
     list.pushBack(4);
     list.pushBack(5);
 
+    REQUIRE(list.size() == 5);
     REQUIRE(list.at(0) == 1);
     REQUIRE(list.at(1) == 2);
     REQUIRE(list.at(2) == 3);
@@ -46,6 +49,7 @@ TEST_CASE("push front", "[List]") {
     list.pushFront(4);
     list.pushFront(5);
 
+    REQUIRE(list.size() == 5);
     REQUIRE(list.at(0) == 5);
     REQUIRE(list.at(1) == 4);
     REQUIRE(list.at(2) == 3);
@@ -65,6 +69,7 @@ TEST_CASE("pop back", "[List]") {
     int value_at_4 = list.popBack();
     int value_at_3 = list.popBack();
 
+    REQUIRE(list.size() == 3);
     REQUIRE(list.at(0) == 1);
     REQUIRE(list.at(1) == 2);
     REQUIRE(list.at(2) == 3);
@@ -84,6 +89,7 @@ TEST_CASE("pop front", "[List]") {
     int value_at_0 = list.popFront();
     int value_at_1 = list.popFront();
 
+    REQUIRE(list.size() == 3);
     REQUIRE(value_at_0 == 1);
     REQUIRE(value_at_1 == 2);
     REQUIRE(list.at(0) == 3);

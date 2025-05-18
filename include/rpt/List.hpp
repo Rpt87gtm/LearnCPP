@@ -122,6 +122,8 @@ public:
         return current->m_value;
     }
 
+    size_t size() const noexcept { return m_size; }
+
 private:
     size_t m_size = 0;
     std::unique_ptr<ListNode> head;
