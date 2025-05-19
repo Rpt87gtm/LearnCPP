@@ -8,6 +8,8 @@ namespace rpt {
 
 template <typename T> class mVector {
 public:
+    using value_type = T;
+
     mVector() : m_arr(nullptr), m_size(0), m_allocated(0) {}
 
     mVector(std::initializer_list<T> init) : m_arr(new T[init.size()]), m_size(init.size()), m_allocated(init.size()) {
