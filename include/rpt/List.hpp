@@ -4,15 +4,6 @@
 namespace rpt {
 
 template <typename T> class List {
-private:
-    struct ListNode {
-        T m_value;
-        std::unique_ptr<ListNode> next;
-        ListNode *prev;
-
-        explicit ListNode(T value) : m_value(std::move(value)), prev(nullptr) {}
-    };
-
 public:
     List() = default;
 
@@ -125,6 +116,14 @@ public:
     size_t size() const noexcept { return m_size; }
 
 private:
+    struct ListNode {
+        T m_value;
+        std::unique_ptr<ListNode> next;
+        ListNode *prev;
+
+        explicit ListNode(T value) : m_value(std::move(value)), prev(nullptr) {}
+    };
+
     size_t m_size = 0;
     std::unique_ptr<ListNode> head;
     ListNode *tail = nullptr;
