@@ -14,6 +14,8 @@ private:
     };
 
 public:
+    using value_type = T;
+
     List() = default;
 
     List(std::initializer_list<T> init) {
@@ -122,7 +124,13 @@ public:
         return current->m_value;
     }
 
+    T &operator[](size_t index) { return at(index); }
+
+    const T &operator[](size_t index) const { return at(index); }
+
     size_t size() const noexcept { return m_size; }
+
+    bool empty() const noexcept { return m_size == 0; }
 
     class Iterator {
     public:
