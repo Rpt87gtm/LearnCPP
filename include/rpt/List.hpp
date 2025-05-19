@@ -126,11 +126,17 @@ public:
 
     class Iterator {
     public:
+        using iterator_category = std::bidirectional_iterator_tag;
+        using value_type        = T;
+        using difference_type   = std::ptrdiff_t;
+        using pointer           = T *;
+        using reference         = T &;
+
         explicit Iterator(ListNode *node) : current(node) {}
 
-        T *operator->() const noexcept { return &current->m_value; }
+        pointer *operator->() const noexcept { return &current->m_value; }
 
-        T &operator*() const noexcept { return current->m_value; }
+        reference &operator*() const noexcept { return current->m_value; }
 
         Iterator &operator++() noexcept {
             current = current->next.get();
@@ -162,6 +168,50 @@ public:
         ListNode *current = nullptr;
     };
 
+    class ReverseIterator {
+    public:
+        using iterator_category = std::bidirectional_iterator_tag;
+        using value_type        = T;
+        using difference_type   = std::ptrdiff_t;
+        using pointer           = T *;
+        using reference         = T &;
+
+        explicit ReverseIterator(ListNode *node) : current(node) {}
+
+        T *operator->() const noexcept { return &current->m_value; }
+
+        T &operator*() const noexcept { return current->m_value; }
+
+        ReverseIterator &operator++() noexcept {
+            current = current->prev;
+            return *this;
+        }
+
+        ReverseIterator operator++(int) noexcept {
+            ReverseIterator tmp = *this;
+            ++(*this);
+            return tmp;
+        }
+
+        ReverseIterator &operator--() noexcept {
+            current = current ? current->next.get() : nullptr;
+            return *this;
+        }
+
+        ReverseIterator operator--(int) noexcept {
+            ReverseIterator tmp = *this;
+            --(*this);
+            return tmp;
+        }
+
+        bool operator==(const ReverseIterator &other) const noexcept { return current == other.current; }
+
+        bool operator!=(const ReverseIterator &other) const noexcept { return current != other.current; }
+
+    private:
+        ListNode *current = nullptr;
+    };
+
     Iterator begin() noexcept { return Iterator(head.get()); }
 
     Iterator end() noexcept { return Iterator(nullptr); }
@@ -169,6 +219,14 @@ public:
     Iterator begin() const noexcept { return Iterator(head.get()); }
 
     Iterator end() const noexcept { return Iterator(nullptr); }
+
+    ReverseIterator rbegin() noexcept { return ReverseIterator(tail); }
+
+    ReverseIterator rend() noexcept { return ReverseIterator(nullptr); }
+
+    ReverseIterator rbegin() const noexcept { return ReverseIterator(tail); }
+
+    ReverseIterator rend() const noexcept { return ReverseIterator(nullptr); }
 
 private:
     size_t m_size = 0;

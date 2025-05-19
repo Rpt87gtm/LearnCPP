@@ -59,6 +59,26 @@ TEST_CASE("iterator test 2", "[List]") {
     REQUIRE(list.at(4) == "r");
 }
 
+TEST_CASE("iterator test 4 reverse", "[List]") {
+    rpt::List<std::string> list{"1", "q", "w", "e", "r"};
+
+    REQUIRE(list.size() == 5);
+
+    std::string res = "";
+
+    for (auto it = list.rbegin(); it != list.rend(); ++it) {
+        res += *it;
+    }
+
+    REQUIRE(res == "rewq1");
+
+    REQUIRE(list.at(0) == "1");
+    REQUIRE(list.at(1) == "q");
+    REQUIRE(list.at(2) == "w");
+    REQUIRE(list.at(3) == "e");
+    REQUIRE(list.at(4) == "r");
+}
+
 TEST_CASE("at ref", "[List]") {
     rpt::List<int> list{1, 2, 3};
     list.at(1) = 7;
