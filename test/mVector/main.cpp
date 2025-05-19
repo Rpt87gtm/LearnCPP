@@ -11,6 +11,19 @@ TEST_CASE("default constructor", "[Vector]") {
     REQUIRE(vec[4] == 5);
 }
 
+TEST_CASE("at func", "[Vector]") {
+    rpt::mVector<int> vec{1, 2, 3, 4, 5};
+
+    vec.at(2) = 7;
+    vec[3]    = 9;
+
+    REQUIRE(vec[0] == 1);
+    REQUIRE(vec[1] == 2);
+    REQUIRE(vec[2] == 7);
+    REQUIRE(vec[3] == 9);
+    REQUIRE(vec[4] == 5);
+}
+
 TEST_CASE("push_back", "[Vector]") {
     rpt::mVector<int> vec;
     vec.pushBack(1);

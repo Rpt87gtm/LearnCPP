@@ -70,7 +70,7 @@ public:
         return m_arr[m_size]; // NOLINT
     }
 
-    T at(size_t pos) const {
+    [[nodiscard]] T &at(size_t pos) const {
         if (pos < 0 || pos >= m_size) {
             throw std::out_of_range(std::format("Position: \"{}\" out of range (0,{})", pos, m_size));
         }
