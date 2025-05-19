@@ -60,6 +60,9 @@ public:
     }
 
     void breadthTraversal(std::function<void(const T &)> action) {
+        if (!root) {
+            return;
+        }
         std::queue<TreeNode *> queue;
 
         queue.push(root.get());
