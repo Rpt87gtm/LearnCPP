@@ -4,6 +4,15 @@
 namespace rpt {
 
 template <typename T> class List {
+private:
+    struct ListNode {
+        T m_value;
+        std::unique_ptr<ListNode> next;
+        ListNode *prev;
+
+        explicit ListNode(T value) : m_value(std::move(value)), prev(nullptr) {}
+    };
+
 public:
     List() = default;
 
@@ -115,15 +124,53 @@ public:
 
     size_t size() const noexcept { return m_size; }
 
-private:
-    struct ListNode {
-        T m_value;
-        std::unique_ptr<ListNode> next;
-        ListNode *prev;
+    class Iterator {
+    public:
+        explicit Iterator(ListNode *node) : current(node) {}
 
-        explicit ListNode(T value) : m_value(std::move(value)), prev(nullptr) {}
+        T *operator->() const noexcept { return &current->m_value; }
+
+        T &operator*() const noexcept { return current->m_value; }
+
+        Iterator &operator++() noexcept {
+            current = current->next.get();
+            return *this;
+        }
+
+        Iterator operator++(int) {
+            Iterator tmp = *this;
+            ++(*this);
+            return tmp;
+        }
+
+        Iterator &operator--() noexcept {
+            current = current->prev;
+            return *this;
+        }
+
+        Iterator operator--(int) noexcept {
+            Iterator tmp = *this;
+            --(*this);
+            return tmp;
+        }
+
+        bool operator==(const Iterator &other) const noexcept { return current == other.current; }
+
+        bool operator!=(const Iterator &other) const noexcept { return !(*this == other); }
+
+    private:
+        ListNode *current = nullptr;
     };
 
+    Iterator begin() noexcept { return Iterator(head.get()); }
+
+    Iterator end() noexcept { return Iterator(nullptr); }
+
+    Iterator begin() const noexcept { return Iterator(head.get()); }
+
+    Iterator end() const noexcept { return Iterator(nullptr); }
+
+private:
     size_t m_size = 0;
     std::unique_ptr<ListNode> head;
     ListNode *tail = nullptr;
