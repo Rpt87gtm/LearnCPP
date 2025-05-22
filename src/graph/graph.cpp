@@ -20,3 +20,28 @@ std::vector<int> rpt::BFS(const Graph &graph, int start) {
 
     return dist;
 }
+
+std::vector<int> rpt::Dijkstra(const Graph &graph, int start) {
+    std::priority_queue<Edge, std::vector<Edge>, std::greater<Edge>> queue;
+    std::vector<int> dist(graph.size(), INT_MAX);
+    dist[start] = 0;
+    queue.push({0, start});
+
+    while (!queue.empty()) {
+        auto [distance, node] = queue.top();
+        queue.pop();
+
+        if (distance > dist[node]) {
+            continue;
+        }
+        for (auto child: graph[node]) {
+            if (dist[child.second] > dist[node] + child.first) {
+                auto new_distance  = dist[node] + child.first;
+                dist[child.second] = new_distance;
+                queue.push({new_distance, child.second});
+            }
+        }
+    }
+
+    return dist;
+}
