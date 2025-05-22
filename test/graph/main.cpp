@@ -7,7 +7,7 @@
 #include <string>
 
 void print_graph(const std::vector<int> &dist, const int &start) {
-    std::cout << std::format("Start form node: {}\n", start);
+    std::cout << std::format("Start from node: {}\n", start);
     for (int i = 0; i < dist.size(); i++) {
         std::cout << std::format("{} -> {}\n", i, dist[i]);
     }
@@ -16,21 +16,21 @@ void print_graph(const std::vector<int> &dist, const int &start) {
 TEST_CASE("BFS", "[Graph]") {
     rpt::Graph graph(6);
     graph[0] = {
-      {1, 1},
-      {1, 3}
+      {1, 1}, // узел, вес → теперь {1, 1}
+      {3, 1}  // узел, вес → теперь {3, 1}
     };
     graph[1] = {
-      {1, 2}
+      {2, 1}  // узел, вес → теперь {2, 1}
     };
     graph[2] = {
-      {1, 3}
+      {3, 1}  // узел, вес → теперь {3, 1}
     };
     graph[3] = {
-      {1, 4}
+      {4, 1}  // узел, вес → теперь {4, 1}
     };
     graph[4] = {
-      {1, 5},
-      {1, 0}
+      {5, 1}, // узел, вес → теперь {5, 1}
+      {0, 1}  // узел, вес → теперь {0, 1}
     };
     graph[5] = {};
 
@@ -59,24 +59,24 @@ TEST_CASE("BFS", "[Graph]") {
     REQUIRE(dist_form_5 == std::vector<int>({-1, -1, -1, -1, -1, 0}));
 }
 
-TEST_CASE("Dijkstra with the unweighted graph ", "[Graph]") {
+TEST_CASE("Dijkstra with the unweighted graph", "[Graph]") {
     rpt::Graph graph(6);
     graph[0] = {
-      {1, 1},
-      {1, 3}
+      {1, 1}, // узел, вес → теперь {1, 1}
+      {3, 1}  // узел, вес → теперь {3, 1}
     };
     graph[1] = {
-      {1, 2}
+      {2, 1}  // узел, вес → теперь {2, 1}
     };
     graph[2] = {
-      {1, 3}
+      {3, 1}  // узел, вес → теперь {3, 1}
     };
     graph[3] = {
-      {1, 4}
+      {4, 1}  // узел, вес → теперь {4, 1}
     };
     graph[4] = {
-      {1, 5},
-      {1, 0}
+      {5, 1}, // узел, вес → теперь {5, 1}
+      {0, 1}  // узел, вес → теперь {0, 1}
     };
     graph[5] = {};
 
@@ -105,38 +105,37 @@ TEST_CASE("Dijkstra with the unweighted graph ", "[Graph]") {
     REQUIRE(dist_form_5 == std::vector<int>({INT_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX, 0}));
 }
 
-TEST_CASE("Dijkstra with the weighted graph ", "[Graph]") {
+TEST_CASE("Dijkstra with the weighted graph", "[Graph]") {
     rpt::Graph graph(9);
     graph[0] = {
-      {2, 1},
-      {2, 2}
+      {1, 2}, // узел, вес → теперь {1, 2}
+      {2, 2}  // узел, вес → теперь {2, 2}
     };
     graph[1] = {
-      {3, 4},
-      {2, 3},
+      {4, 3}, // узел, вес → теперь {4, 3}
+      {3, 2}  // узел, вес → теперь {3, 2}
     };
     graph[2] = {
-      {1, 3}
+      {3, 1}  // узел, вес → теперь {3, 1}
     };
     graph[3] = {
-      {1, 4},
-      {3, 5},
+      {4, 1}, // узел, вес → теперь {4, 1}
+      {5, 3}  // узел, вес → теперь {5, 3}
     };
     graph[4] = {
-      {2, 7},
-      {3, 6}
+      {7, 2}, // узел, вес → теперь {7, 2}
+      {6, 3}  // узел, вес → теперь {6, 3}
     };
     graph[5] = {
-      {1, 6},
-      {2, 8},
+      {6, 1}, // узел, вес → теперь {6, 1}
+      {8, 2}  // узел, вес → теперь {8, 2}
     };
-
     graph[6] = {
-      {1, 2},
-      {1, 7},
+      {2, 1}, // узел, вес → теперь {2, 1}
+      {7, 1}  // узел, вес → теперь {7, 1}
     };
     graph[7] = {
-      {2, 8},
+      {8, 2}  // узел, вес → теперь {8, 2}
     };
     graph[8] = {};
 

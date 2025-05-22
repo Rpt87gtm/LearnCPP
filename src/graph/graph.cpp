@@ -11,9 +11,9 @@ std::vector<int> rpt::BFS(const Graph &graph, int start) {
         int node = queue.front();
         queue.pop();
         for (auto child: graph[node]) {
-            if (dist[child.second] == -1) {
-                dist[child.second] = dist[node] + child.first;
-                queue.push(child.second);
+            if (dist[child.first] == -1) {
+                dist[child.first] = dist[node] + child.second;
+                queue.push(child.first);
             }
         }
     }
@@ -35,10 +35,10 @@ std::vector<int> rpt::Dijkstra(const Graph &graph, int start) {
             continue;
         }
         for (auto child: graph[node]) {
-            if (dist[child.second] > dist[node] + child.first) {
-                auto new_distance  = dist[node] + child.first;
-                dist[child.second] = new_distance;
-                queue.push({new_distance, child.second});
+            if (dist[child.first] > dist[node] + child.second) {
+                auto new_distance = dist[node] + child.second;
+                dist[child.first] = new_distance;
+                queue.push({new_distance, child.first});
             }
         }
     }

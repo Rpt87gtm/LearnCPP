@@ -5,7 +5,7 @@
 namespace rpt {
 using Distance = int;
 using EdgeId   = int;
-using Edge     = std::pair<Distance, EdgeId>;
+using Edge     = std::pair<EdgeId, Distance>;
 using Node     = std::vector<Edge>;
 using Graph    = std::vector<Node>;
 
