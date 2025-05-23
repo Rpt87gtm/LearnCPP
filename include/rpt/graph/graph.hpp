@@ -1,9 +1,11 @@
 #pragma once
+#include <cassert>
 #include <stdexcept>
 #include <utility>
 #include <vector>
 
 namespace rpt {
+
 using Distance   = int;
 using TargetNode = int;
 
@@ -12,9 +14,7 @@ public:
     Edge(TargetNode target_node, Distance distance_to_node) : target(target_node), distance(distance_to_node) {}
 
     Edge(std::initializer_list<int> list) {
-        if (list.size() != 2) {
-            throw std::invalid_argument("Edge requires exactly 2 values");
-        }
+        assert(list.size() == 2 && "Edge requires exactly 2 values");
         auto it = list.begin();
         target  = *it;
         it++;
