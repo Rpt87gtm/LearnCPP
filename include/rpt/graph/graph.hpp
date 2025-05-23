@@ -35,8 +35,6 @@ public:
 
     explicit Node(std::vector<Edge> edges) : edges(std::move(edges)) {}
 
-    // Node(std::initializer_list<Edge> init_list) : edges(init_list) {}
-
     Node(std::initializer_list<std::pair<TargetNode, Distance>> init_list) {
         edges.reserve(init_list.size());
         for (const auto &[target, dist]: init_list) {
