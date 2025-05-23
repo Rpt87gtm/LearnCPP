@@ -169,11 +169,11 @@ void check_path(
         while (it != dist[i].second.end()) {
             auto edge_it =
               std::find_if(graph[prev_node].begin(), graph[prev_node].end(), [target = *it](const rpt::Edge &edge) {
-                  return edge.first == target;
+                  return edge.target == target;
               });
 
             REQUIRE((edge_it != graph[prev_node].end()));
-            path += edge_it->second;
+            path += edge_it->distance;
             prev_node = *it;
             it++;
         }

@@ -11,9 +11,9 @@ std::vector<int> rpt::BFS(const Graph &graph, const int &start) {
         int node = queue.front();
         queue.pop();
         for (auto child: graph[node]) {
-            if (dist[child.first] == -1) {
-                dist[child.first] = dist[node] + child.second;
-                queue.push(child.first);
+            if (dist[child.target] == -1) {
+                dist[child.target] = dist[node] + child.distance;
+                queue.push(child.target);
             }
         }
     }
@@ -35,10 +35,10 @@ std::vector<int> rpt::Dijkstra(const Graph &graph, const int &start) {
             continue;
         }
         for (auto child: graph[node]) {
-            if (dist[child.first] > dist[node] + child.second) {
-                auto new_distance = dist[node] + child.second;
-                dist[child.first] = new_distance;
-                queue.push({new_distance, child.first});
+            if (dist[child.target] > dist[node] + child.distance) {
+                auto new_distance  = dist[node] + child.distance;
+                dist[child.target] = new_distance;
+                queue.push({new_distance, child.target});
             }
         }
     }
@@ -60,12 +60,12 @@ std::vector<std::pair<int, std::vector<int>>> rpt::Dijkstra_path(const Graph &gr
             continue;
         }
         for (auto child: graph[node]) {
-            if (dist_with_path[child.first].first > dist_with_path[node].first + child.second) {
-                auto new_distance = dist_with_path[node].first + child.second;
+            if (dist_with_path[child.target].first > dist_with_path[node].first + child.distance) {
+                auto new_distance = dist_with_path[node].first + child.distance;
                 auto new_path     = dist_with_path[node].second;
-                new_path.push_back(child.first);
-                dist_with_path[child.first] = {new_distance, new_path};
-                queue.push({new_distance, child.first});
+                new_path.push_back(child.target);
+                dist_with_path[child.target] = {new_distance, new_path};
+                queue.push({new_distance, child.target});
             }
         }
     }
