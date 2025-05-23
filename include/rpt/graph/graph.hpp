@@ -21,7 +21,9 @@ public:
         distance = *it;
     }
 
-    bool operator>(const Edge &other) const { return distance > other.distance; }
+    bool operator>(const Edge &other) const noexcept { return distance > other.distance; }
+
+    bool operator<(const Edge &other) const noexcept { return distance < other.distance; }
 
     TargetNode target;
     Distance distance;
